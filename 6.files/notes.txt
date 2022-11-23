@@ -1,0 +1,26 @@
+1. run docker file of OTP Service
+docker run -d -p 8080:8080 -e AWS_REGION=af-south-1 --name opt-service 8f00d84085ec
+
+=========================
+minikube start --nodes 3 -p multinode-cluster --vm-driver=docker
+
+minikube tunnel -p multinode-cluster
+
++ create configmap using file application-dev.yml
+kubectl create configmap sam-actuator-configmap --from-file=application-dev.yml
+
++ create configmap using literal
+kubectl create configmap sam-actuator-configmap --from-literal=profile.name=development -n singtel-totf
+
++ get configmap as yaml
+kubectl get configmap sam-actuator-configmap -o yaml
+
++ link youtube
+https://youtu.be/I1OcFX6_09c
+======================
+
+https://cuongquach.com/co-che-healthcheck-readiness-liveness-kubernetes.html
+
+
+curl --location --request GET 'http://localhost:8081/api/v1/sam/check-profile'
+curl --location --request GET 'http://192.168.58.2:8081/api/v1/sam/check-profile'
